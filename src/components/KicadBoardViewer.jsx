@@ -68,9 +68,16 @@ function fitCamera(camera, controls, group) {
   const box = new THREE.Box3().setFromObject(group);
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
+  const sphere = box.getBoundingSphere(new THREE.Sphere());
   const maxDimension = Math.max(size.x, size.y, size.z, 1);
-  const fieldOfView = THREE.MathUtils.degToRad(camera.fov);
-  const distance = (maxDimension / (2 * Math.tan(fieldOfView / 2))) * 1.35;
+  const verticalFieldOfView = THREE.MathUtils.degToRad(camera.fov);
+  const horizontalFieldOfView = 2 * Math.atan(
+    Math.tan(verticalFieldOfView / 2) * Math.max(camera.aspect, 0.01),
+  );
+  const limitingFieldOfView = Math.min(verticalFieldOfView, horizontalFieldOfView);
+  const fitPadding = camera.aspect < 0.85 ? 1.18 : 1.12;
+  const radius = Math.max(sphere.radius, maxDimension / 2, 0.5);
+  const distance = (radius / Math.sin(limitingFieldOfView / 2)) * fitPadding;
   const direction = new THREE.Vector3(1, 0.9, 1).normalize();
 
   camera.near = Math.max(maxDimension / 1000, 0.01);
@@ -105,6 +112,14 @@ export default function KicadBoardViewer({ board, resetSignal }) {
     renderer.toneMappingExposure = 1.08;
     container.appendChild(renderer.domElement);
 
+    const resize = () => {
+      const { clientWidth, clientHeight } = container;
+      camera.aspect = clientWidth / Math.max(clientHeight, 1);
+      camera.updateProjectionMatrix();
+      renderer.setSize(clientWidth, clientHeight, false);
+    };
+    resize();
+
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.07;
@@ -138,15 +153,8 @@ export default function KicadBoardViewer({ board, resetSignal }) {
     floor.receiveShadow = true;
     scene.add(floor);
 
-    const resize = () => {
-      const { clientWidth, clientHeight } = container;
-      camera.aspect = clientWidth / Math.max(clientHeight, 1);
-      camera.updateProjectionMatrix();
-      renderer.setSize(clientWidth, clientHeight, false);
-    };
     const observer = new ResizeObserver(resize);
     observer.observe(container);
-    resize();
 
     let animationFrame;
     const animate = () => {
