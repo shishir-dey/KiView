@@ -3,7 +3,6 @@ import BoardViewer from './components/KicadBoardViewer.jsx';
 import { convertKicadBoard } from './lib/boardModel.js';
 import {
   CheckIcon,
-  CubeIcon,
   GithubIcon,
   LayersIcon,
   ResetIcon,
@@ -11,6 +10,7 @@ import {
 } from './icons.jsx';
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
+const LOGO_URL = `${import.meta.env.BASE_URL}kiview-logo.png`;
 
 function App() {
   const inputRef = useRef(null);
@@ -55,12 +55,9 @@ function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <div className="brand" aria-label="KiView">
-          <span className="brand-mark"><CubeIcon size={20} /></span>
-          <span className="brand-copy">
-            <strong>KiView</strong>
-            <small>*.kicad_pcb Viewer</small>
-          </span>
+        <div className="brand">
+          <img className="brand-logo" src={LOGO_URL} alt="KiView" />
+          <span className="brand-tagline">*.kicad_pcb Viewer</span>
         </div>
         <div className="header-actions">
           <input

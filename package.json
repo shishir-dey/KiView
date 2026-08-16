@@ -2,6 +2,24 @@
   "name": "kiview",
   "private": true,
   "version": "0.1.0",
+  "description": "A fast, private, browser-based 3D viewer for KiCad PCB files.",
+  "keywords": [
+    "kicad",
+    "pcb",
+    "3d-viewer",
+    "webassembly",
+    "three.js"
+  ],
+  "homepage": "https://shishir-dey.github.io/KiView/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shishir-dey/KiView.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shishir-dey/KiView/issues"
+  },
+  "author": "Shishir Dey",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "wasm": "wasm-pack build wasm --target web --out-dir ../src/wasm/pkg --release",

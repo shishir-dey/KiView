@@ -37,25 +37,14 @@ a { color: inherit; text-decoration: none; }
 
 .brand {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
   color: var(--text);
 }
 
-.brand-copy { display: flex; flex-direction: column; gap: 2px; }
-.brand-copy strong { font-size: 20px; font-weight: 600; line-height: 1.05; letter-spacing: -0.45px; }
-.brand-copy small { color: var(--tertiary); font-size: 10px; font-weight: 400; line-height: 1.1; letter-spacing: 0; }
-
-.brand-mark {
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: 9px;
-  color: #fff;
-  background: linear-gradient(145deg, #2997ff, #0071e3);
-  box-shadow: 0 2px 7px rgba(0, 113, 227, 0.22);
-}
+.brand-logo { width: 118px; height: auto; display: block; mix-blend-mode: multiply; }
+.brand-tagline { margin-left: 2px; color: var(--tertiary); font-size: 9px; font-weight: 400; line-height: 1.1; letter-spacing: 0; }
 
 .header-actions { display: flex; align-items: center; gap: 10px; }
 .file-input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
@@ -284,9 +273,8 @@ main { flex: 1; display: flex; min-height: 0; overflow: hidden; }
 }
 
 @media (max-width: 480px) {
-  .brand-copy strong { font-size: 18px; }
-  .brand-copy small { font-size: 9px; }
-  .brand-mark { width: 32px; height: 32px; }
+  .brand-logo { width: 108px; }
+  .brand-tagline { font-size: 8px; }
   .upload-button { width: 38px; padding: 0; justify-content: center; }
   .upload-button span { display: none; }
 }
