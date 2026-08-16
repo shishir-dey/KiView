@@ -1,4 +1,4 @@
-import initWasm, { parse_kicad_pcb as parseKicadPcb } from '../wasm/pkg/copperview_wasm.js';
+import initWasm, { parse_kicad_pcb as parseKicadPcb } from '../wasm/pkg/kiview_wasm.js';
 
 let wasmInitialization;
 

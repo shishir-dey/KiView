@@ -1,8 +1,8 @@
 import { readFile } from 'node:fs/promises';
-import initWasm, { parse_kicad_pcb as parseKicadPcb } from '../src/wasm/pkg/copperview_wasm.js';
+import initWasm, { parse_kicad_pcb as parseKicadPcb } from '../src/wasm/pkg/kiview_wasm.js';
 
 const wasmBytes = await readFile(
-  new URL('../src/wasm/pkg/copperview_wasm_bg.wasm', import.meta.url),
+  new URL('../src/wasm/pkg/kiview_wasm_bg.wasm', import.meta.url),
 );
 await initWasm({ module_or_path: wasmBytes });
 
